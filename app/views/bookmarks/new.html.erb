@@ -1,0 +1,17 @@
+<!-- app/views/bookmarks/new.html.erb -->
+
+<h1>New Bookmark</h1>
+
+<%= simple_form_for [@list, @bookmark] do |f| %>
+  <%= f.association :movie, collection: Movie.all, prompt: "Select a movie" %>
+  <%= f.input :comment %>
+
+  <%= f.simple_fields_for :movie do |movie_fields| %>
+    <div class="form-group">
+      <%= movie_fields.label :rating %>
+      <%= movie_fields.select :rating, (1..10), prompt: "Select a rating", class: "form-control" %>
+    </div>
+  <% end %>
+
+  <%= f.submit "Create Bookmark", class: "btn btn-primary" %>
+<% end %>
